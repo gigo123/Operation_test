@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainApp {
+	private static HashMap<String, Integer> alfabetTable;
 
-	private HashMap<String, Integer> getScoreTable() {
+	private static HashMap<String, Integer> getScoreTable() {
 		HashMap<String, Integer> score = new HashMap<>();
 		score.put("a", 1);
 		score.put("b", 2);
@@ -66,14 +67,36 @@ public class MainApp {
 		}
 		return namesList;
 	}
+	private static int calcChar(char separateChar) {
+		String separateString =  String.valueOf(separateChar);
+		return  alfabetTable.get(separateString);
+	}
+	private static List<Integer> calcValue(List<String> nameList){
+		List<Integer> scoreList = new ArrayList<>();
+		for (int j=0; j<nameList.size();j++) {
+			String name = nameList.get(j);
+			int nameValue =0;
+			for(int i=0;i<name.length();i++) {
+				char separateChar = name.charAt(i);
+				nameValue= nameValue + calcChar(separateChar);
+			}
+			scoreList.add(nameValue*(j+1));
+		}		
+		return scoreList;
+	}
+	
 
+	
 	public static void main(String[] args) {
-
+		alfabetTable = getScoreTable();
 		List<String> nameList = readFile("1.txt");
 		Collections.sort(nameList);
-		System.out.println(nameList);
-		
-
+		List<Integer> number =  calcValue(nameList);
+		int sum =0;
+		for (Integer integer : number) {
+			sum+=integer;
+		}
+		System.out.println("total sum of names in file  is " + sum);	
 	}
 
 }
