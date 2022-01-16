@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class MainApp {
 			do {
 				currentLine = reader.readLine();
 				if (currentLine != null) {
+					currentLine = currentLine.toLowerCase();
 					namesList.add(currentLine);
 				}
 			} while (currentLine != null);
@@ -67,6 +69,9 @@ public class MainApp {
 
 	public static void main(String[] args) {
 
+		List<String> nameList = readFile("1.txt");
+		Collections.sort(nameList);
+		System.out.println(nameList);
 		
 
 	}
