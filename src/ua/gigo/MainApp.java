@@ -1,12 +1,15 @@
 package ua.gigo;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainApp {
 	private static HashMap<String, Integer> alfabetTable;
@@ -67,36 +70,61 @@ public class MainApp {
 		}
 		return namesList;
 	}
-	private static int calcChar(char separateChar) {
-		String separateString =  String.valueOf(separateChar);
-		return  alfabetTable.get(separateString);
+	
+	private static List<String> readFileWD(String path) {
+		List<String> namesList = new ArrayList<String>();
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(new File(path));
+			 scanner.useDelimiter("\",\"");
+			 String temp="";
+				while (scanner.hasNext()) {
+					
+					temp =scanner.next();
+					System.out.println(temp);
+					temp = temp.toLowerCase();
+					namesList.add(temp);
+				}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	   
 	}
-	private static List<Integer> calcValue(List<String> nameList){
+		return namesList;
+	}
+
+	private static int calcChar(char separateChar) {
+		String separateString = String.valueOf(separateChar);
+		if(separateString.equals("\"")) {
+		 return 0;
+		}
+		return alfabetTable.get(separateString);
+	}
+
+	private static List<Integer> calcValue(List<String> nameList) {
 		List<Integer> scoreList = new ArrayList<>();
-		for (int j=0; j<nameList.size();j++) {
+		for (int j = 0; j < nameList.size(); j++) {
 			String name = nameList.get(j);
-			int nameValue =0;
-			for(int i=0;i<name.length();i++) {
+			int nameValue = 0;
+			for (int i = 0; i < name.length(); i++) {
 				char separateChar = name.charAt(i);
-				nameValue= nameValue + calcChar(separateChar);
+				nameValue = nameValue + calcChar(separateChar);
 			}
-			scoreList.add(nameValue*(j+1));
-		}		
+			scoreList.add(nameValue * (j + 1));
+		}
 		return scoreList;
 	}
-	
 
-	
 	public static void main(String[] args) {
 		alfabetTable = getScoreTable();
-		List<String> nameList = readFile("1.txt");
+		List<String> nameList = readFileWD("p022_names.txt");
 		Collections.sort(nameList);
-		List<Integer> number =  calcValue(nameList);
-		int sum =0;
+		List<Integer> number = calcValue(nameList);
+		int sum = 0;
 		for (Integer integer : number) {
-			sum+=integer;
+			sum += integer;
 		}
-		System.out.println("total sum of names in file  is " + sum);	
+		System.out.println("total sum of names in file  is " + sum);
 	}
 
 }
