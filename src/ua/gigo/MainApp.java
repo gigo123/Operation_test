@@ -1,11 +1,16 @@
 package ua.gigo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainApp {
-	
-	private HashMap<String, Integer> getScoreTable(){
-		HashMap<String, Integer> score = new  HashMap<>();
+
+	private HashMap<String, Integer> getScoreTable() {
+		HashMap<String, Integer> score = new HashMap<>();
 		score.put("a", 1);
 		score.put("b", 2);
 		score.put("c", 3);
@@ -34,8 +39,36 @@ public class MainApp {
 		score.put("z", 26);
 		return score;
 	}
+
+	private static List<String> readFile(String path) {
+		List<String> namesList = new ArrayList<String>();
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(path));
+			String currentLine = null;
+			do {
+				currentLine = reader.readLine();
+				if (currentLine != null) {
+					namesList.add(currentLine);
+				}
+			} while (currentLine != null);
+
+		} catch (IOException e) {
+			System.out.println("io.exeption");
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				System.out.println("io.exeption");
+			}
+		}
+		return namesList;
+	}
+
 	public static void main(String[] args) {
+
 		
+
 	}
 
 }
