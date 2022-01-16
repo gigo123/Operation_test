@@ -16,32 +16,32 @@ public class MainApp {
 
 	private static HashMap<String, Integer> getScoreTable() {
 		HashMap<String, Integer> score = new HashMap<>();
-		score.put("a", 1);
-		score.put("b", 2);
-		score.put("c", 3);
-		score.put("d", 4);
-		score.put("e", 5);
-		score.put("f", 6);
-		score.put("g", 7);
-		score.put("h", 8);
-		score.put("i", 9);
-		score.put("j", 10);
-		score.put("k", 11);
-		score.put("l", 12);
-		score.put("m", 13);
-		score.put("n", 14);
-		score.put("o", 15);
-		score.put("p", 16);
-		score.put("q", 17);
-		score.put("r", 18);
-		score.put("s", 19);
-		score.put("t", 20);
-		score.put("u", 21);
-		score.put("v", 22);
-		score.put("w", 23);
-		score.put("x", 24);
-		score.put("y", 25);
-		score.put("z", 26);
+		score.put("A", 1);
+		score.put("B", 2);
+		score.put("C", 3);
+		score.put("D", 4);
+		score.put("E", 5);
+		score.put("F", 6);
+		score.put("G", 7);
+		score.put("H", 8);
+		score.put("I", 9);
+		score.put("J", 10);
+		score.put("K", 11);
+		score.put("L", 12);
+		score.put("M", 13);
+		score.put("N", 14);
+		score.put("O", 15);
+		score.put("P", 16);
+		score.put("Q", 17);
+		score.put("R", 18);
+		score.put("S", 19);
+		score.put("T", 20);
+		score.put("U", 21);
+		score.put("V", 22);
+		score.put("W", 23);
+		score.put("X", 24);
+		score.put("Y", 25);
+		score.put("Z", 26);
 		return score;
 	}
 
@@ -77,13 +77,8 @@ public class MainApp {
 		try {
 			scanner = new Scanner(new File(path));
 			 scanner.useDelimiter("\",\"");
-			 String temp="";
 				while (scanner.hasNext()) {
-					
-					temp =scanner.next();
-					System.out.println(temp);
-					temp = temp.toLowerCase();
-					namesList.add(temp);
+					namesList.add(scanner.next());
 				}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
